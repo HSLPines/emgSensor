@@ -1,0 +1,7 @@
+{
+    "java.project.sourcePaths": [
+        "api/account/src/main/java/emg/account",
+        "api/account/src/main/java/account/account",
+        "api"
+    ]
+}

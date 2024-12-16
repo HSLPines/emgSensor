@@ -17,7 +17,7 @@ class IndexRoute {
 			erro = "Dados inválidos";
 		} else if (isNaN(leitura.emg)) {
 			erro = "Leitura EMG inválida";
-		} 
+		}
 
 		if (erro) {
 			res.status(400).json(erro);
@@ -92,19 +92,25 @@ class IndexRoute {
 	}
 
 	public async obterDadosDev(req: app.Request, res: app.Response) {
-
-		let dados: number[];
-
+		let dados: any[] = [];
+	
 		await app.sql.connect(async (sql: app.Sql) => {
 			let lista: any[] = await sql.query("select amplitude from leitura order by id_leitura desc limit 100");
-			dados = lista.map(l => l.amplitude);
-			dados.reverse();
+			let reverseLista = lista.reverse();
+			
+			dados = reverseLista.map((l, index) => {
+				return {
+					dia: `Dia ${index + 1}`,
+					valor: l.amplitude
+				};
+			});
 		});
-
+	
 		res.json(dados);
-
 	}
 	
+
+
 }
 
 export = IndexRoute;

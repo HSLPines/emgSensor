@@ -1,0 +1,14 @@
+import lombok.Builder;
+import lombok.experimental.Accessors;
+
+@Builder @Accessors(fluent = true)
+public record AccountIn (
+    String id_account,
+    String nome,
+    java.util.Date data_inicio,
+    int secao_account,
+    String musculo_pref
+
+) {
+    
+}

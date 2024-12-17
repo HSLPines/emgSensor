@@ -5,6 +5,7 @@ create schema modelo_emg;
 
 use modelo_emg;
 
+
 CREATE TABLE ENDERECO (
     id_endereco INT AUTO_INCREMENT PRIMARY KEY,
     logradouro VARCHAR(255) NOT NULL,
@@ -37,7 +38,12 @@ CREATE TABLE USUARIO (
     id_usuario INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(255) NOT NULL,
     login VARCHAR(255) NOT NULL UNIQUE,
-    senha_hash VARCHAR(255)
+    senha_hash VARCHAR(255),
+	data_inicio DATE,    
+    musculo_pref varchar(255) NOT NULL,
+    id_sessao int,
+	foreign key (id_sessao)
+		references sessao_emg (id_sessao)
 );
 
 CREATE TABLE PROF_SAUDE (
@@ -125,7 +131,12 @@ CREATE TABLE LEITURA (
     FOREIGN KEY (id_sessao) REFERENCES SESSAO_EMG(id_sessao)
 );
 
-
+INSERT INTO USUARIO (nome, login, data_inicio, musculo_pref)
+VALUES
+('Henrique Lecce','hslecce', '2024-05-05', 'Biceps'),
+('João Helbel','jphelbel','2024-07-19','Coxa'),
+('Márcio Alexandroni','marcioA','2024-05-27','Costas'),
+('Paulo do Carmo','iampauloc','2024-10-13','Peitoral') ;
 
 INSERT INTO ENDERECO (logradouro, numero, complemento, cidade, estado, cep)
 VALUES 

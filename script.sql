@@ -34,6 +34,14 @@ create table CLINICA(
     FOREIGN KEY (id_endereco) REFERENCES ENDERECO(id_endereco)
 );
 
+CREATE TABLE ACCOUNT (
+	id_account VARCHAR(255) PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    data_inicio DATE NOT NULL,
+	secao_account INT NOT NULL,
+    musculo_pref VARCHAR(255)
+);
+
 CREATE TABLE USUARIO (
     id_usuario INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(255) NOT NULL,

@@ -13,4 +13,5 @@ void loop() {
   Serial.print("{\"emg\":");
   Serial.print(soma / leituras);
   Serial.print("}");
+  delay(250);
 }

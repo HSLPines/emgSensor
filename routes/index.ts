@@ -31,8 +31,10 @@ class IndexRoute {
 		}
 
 	}
+	
 
 	public async index(req: app.Request, res: app.Response) {
+		
 
 		let hoje = new Date();
 

@@ -1,98 +1,105 @@
-﻿<div class="container-fluid full">
+﻿<style>
+	.navbar {
+		display: none;
+	}
+</style>
 
-	<h1 style="text-align: center; padding-bottom: 10px;">
-		Projeto
-	</h1>
-
-	<div class="row">
-		<div class="col-sm-4">
-
-			<div class="card shadow mb-4">
-				<div class="card-body">
-					<form id="form">
-						<div class="form-group">
-							<label for="data">Data</label>
-							<input id="data" name="data" class="form-control" type="date"
-								value="<%= ano %>-<%= mes %>-<%= dia %>" />
-						</div>
-
-						<button type="submit" class="btn btn-primary">Listar</button>
-					</form>
-
-				</div>
+<div class="container-fluid">
+	<div class="row flex-nowrap">
+		<!-- Sidebar -->
+		<div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+			<div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+				<a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+					<span class="fs-5 d-none d-sm-inline">Dashboard</span>
+				</a>
+				<ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+					<li class="nav-item">
+						<a href="/home" class="nav-link align-middle px-0 text-white">
+							<i class="fs-4 bi-house"></i>
+							<span class="ms-1 d-none d-sm-inline">Home</span>
+						</a>
+					</li>
+					<li>
+						<a href="/dev" class="nav-link align-middle px-0 text-white">
+							<i class="fs-4 bi-speedometer2"></i>
+							<span class="ms-1 d-none d-sm-inline">Dev</span>
+						</a>
+					</li>
+					<li>
+						<a href="/relatorio" class="nav-link align-middle px-0 text-white">
+							<i class="fs-4 bi-table"></i>
+							<span class="ms-1 d-none d-sm-inline">Relatório</span>
+						</a>
+					</li>
+					<li>
+						<a href="/sobre" class="nav-link align-middle px-0 text-white">
+							<i class="fs-4 bi-info-circle"></i>
+							<span class="ms-1 d-none d-sm-inline">Sobre</span>
+						</a>
+					</li>
+				</ul>
 			</div>
 		</div>
 
-		<div class="col-sm-8">
+		<!-- Main Content -->
+		<div class="col py-3">
+			<!-- Status Header -->
+			<div class="container">
+				<div class="status-header">
+					<div class="status-text">
+						<h1>Status do Arduino</h1>
+						<p>
+							Última atualização:
+							<span id="data">00/00/0000 00:00:00</span>
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- Chart Cards -->
 			<div class="card mb-2">
 				<div class="card-body">
-					<h4>🥇DESCRIÇÃO:</h4>
-					<p style="text-align: justify;">
-						Este projeto utiliza um sensor EMG conectado ao Arduino para capturar e monitorar a atividade
-						muscular
-						durante exercícios de reabilitação. O sistema mede a contração dos músculos em tempo real,
-						permitindo
-						que profissionais de saúde acompanhem o progresso dos pacientes que estão em tratamento de
-						reabilitação
-						muscular.
-						<br>
-						Os dados coletados são exibidos em um dashboard administrativo, oferecendo uma visualização
-						clara e
-						intuitiva das métricas de contração muscular, facilitando a análise e o acompanhamento do
-						desempenho do
-						paciente ao longo do tempo. O objetivo principal é fornecer informações úteis para ajustar o
-						tratamento
-						e melhorar o processo de recuperação muscular.
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="card mb-2">
-		<div class="card-body">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-md-5">
-						<div class="card-body">
-							<div class="chart-pie">
-								<canvas id="ChartDoughnut"></canvas>
+					<div class="container-fluid">
+						<div class="row">
+							<!-- Doughnut Chart -->
+							<div class="col-md-5">
+								<div class="chart-pie">
+									<canvas id="ChartDoughnut"></canvas>
+								</div>
 							</div>
-						</div>
-					</div>
-					<div class="col-md-7">
-						<div class="card-body">
-							<div class="chart-bar">
-								<div id="div-grafico">
-									<canvas id="grafico-barras"></canvas>
+							<!-- Bar Chart -->
+							<div class="col-md-7">
+								<div class="chart-bar">
+									<div id="div-grafico">
+										<canvas id="grafico-barras"></canvas>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
 
-	<div class="card">
-		<div class="card-body">
-			<div class="container">
-				<div class="chart-line">
-					<canvas id="lineChart"></canvas>
+			<!-- Line Chart -->
+			<div class="card">
+				<div class="card-body">
+					<div class="container">
+						<div class="chart-line">
+							<canvas id="lineChart"></canvas>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+
+
 <style>
 	.chart-line {
 		position: relative;
 		height: 300px;
 	}
-
-
-
-	
 </style>
 
 <script src="/public/js/jquery-validate/jquery.validate.min.js"></script>

@@ -24,7 +24,7 @@ class IndexRoute {
 		} else {
 
 			await app.sql.connect(async (sql: app.Sql) => {
-				await sql.query("insert into modelo_emg(id_leitura, id_sessao, tempo, tensao, amplitude), values (?, ?, ?, ?, ?)", leitura);
+				await sql.query("insert into leitura(id_sessao, tempo, tensao, amplitude) values (?, ?, ?, ?)", [5, Date.now() / 1000, 0, leitura.emg]);
 			});
 			res.status(204).end();
 
@@ -100,12 +100,7 @@ class IndexRoute {
 			let lista: any[] = await sql.query("select amplitude from leitura order by id_leitura desc limit 100");
 			let reverseLista = lista.reverse();
 			
-			dados = reverseLista.map((l, index) => {
-				return {
-					dia: `Dia ${index + 1}`,
-					valor: l.amplitude
-				};
-			});
+			dados = reverseLista.map((l, index) => l.amplitude);
 		});
 	
 		res.json(dados);
